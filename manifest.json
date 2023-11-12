@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube AdBlock",
+  "version": "1.4",
+  "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "*://www.youtube.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "113.0",
+      "id": "{9ff7f7f9-a625-4cbe-ee6b-8f5c13c1cd79}"
+    },
+    "gecko_android": {
+      "strict_min_version": "113.0"
+    }
+  }
+}
