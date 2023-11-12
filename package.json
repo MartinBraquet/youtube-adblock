@@ -3,7 +3,7 @@
     "start:firefox": "web-ext run --firefox=flatpak:org.mozilla.firefox --verbose"
   },
   "name": "youtube-adblock",
-  "description": "<h1 align=\"center\">Accelerates and Skips YouTube Ads in Less Than a Second</h1>",
+  "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
   "version": "1.0.1",
   "main": "background.js",
   "keywords": [],

@@ -1,4 +1,4 @@
-# Youtube Ad Skipper
+# YouTube Ad Skipper
 
 This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less Than a Second.
 
@@ -6,6 +6,7 @@ This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less T
 * **Auto-Skip**: Bypass ads as soon as they become skippable.
 
 #### How it Works
+
 A process, running when the current tab is `youtube.com/watch`, periodically checks the page content for ads. If there
 is one, the process accelerates it by setting the playback rate to 1000. As soon as the `Skip Ads ->` button
 shows up, the process clicks it. When the ad is skipped, the process increments a local private counter of skipped ads
@@ -21,10 +22,10 @@ in the browser.
 
 ![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif)
 
-
 ## Installation
 
 Install the extension
+
 * at https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock,
 * or go to `Add-ons` and search for `Youtube AdBlock accelerates`.
 
@@ -50,9 +51,9 @@ Other versions might work, but have not been tested.
     ```
 2. Install the prerequisites
 
-    For Debian-based distributions:
-    
-    Install Node.js from these [instructions](https://deb.nodesource.com/).
+   For Debian-based distributions:
+
+   Install Node.js from these [instructions](https://deb.nodesource.com/).
 
    ```sh
    sudo apt install npm
@@ -60,11 +61,10 @@ Other versions might work, but have not been tested.
    ```
 
 3. Run the extension
-
    ```sh
    web-ext run
    ```
-   
+
 ### Debugging
 
 1. Open the browser console
@@ -73,7 +73,7 @@ Other versions might work, but have not been tested.
    Ctrl + Shift + I
    ```
    Or `about:debugging#/runtime/this-firefox` and click on `Inspect` to open the extension console.
-   
+
 ### Build
 
 1. Build the extension
@@ -81,7 +81,7 @@ Other versions might work, but have not been tested.
    ```sh
    web-ext build --overwrite-dest --ignore-files demo martin
    ```
-   
+
 2. The extension is now available in the `web-ext-artifacts` folder as a .zip file.
 
 ### Release
@@ -95,7 +95,6 @@ Please open an [issue](https://github.com/MartinBraquet/youtube-adblock/issues).
 ## Upgrades / Fixes
 
 Please open a [pull request](https://github.com/MartinBraquet/youtube-adblock/pulls).
-
 
 ## Disclaimer
 
