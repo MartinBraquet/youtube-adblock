@@ -100,10 +100,4 @@ Please open a [pull request](https://github.com/MartinBraquet/youtube-adblock/pu
 
 This extension is not affiliated with YouTube or Google in any way.
 
-This repo is a modified version of its parent (which is limited to Chrome only).
-
 This repo has not been tested on any other browser than Mozilla Firefox.
-
-I do not make any claims regarding it being better than the parent repo, which could be extended to Firefox as well. The
-reason for not upgrading the parent repo is that there are too many modifications pertaining to personal
-design and back-end preferences.
