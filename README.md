@@ -20,6 +20,10 @@ in the browser.
 * It stores the number of ads skipped in the local storage, which can only be read by the browser
   (this information is not accessible to anyone / anything else).
 
+#### Demo
+
+Note: Some ads in this demo are skipped so fast that it's difficult to notice them.
+
 ![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif)
 
 ## Installation
