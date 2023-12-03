@@ -1,11 +1,10 @@
 {
   "manifest_version": 2,
   "name": "YouTube AdBlock",
-  "version": "1.5",
+  "version": "1.52",
   "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
   "permissions": [
     "storage",
-    "tabs",
     "activeTab",
     "scripting",
     "*://*.youtube.com/*"
@@ -41,7 +40,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "78.0",
+      "strict_min_version": "113.0",
       "id": "{9ff7f7f9-a625-4cbe-ee6b-8f5c13c1cd79}"
     },
     "gecko_android": {
