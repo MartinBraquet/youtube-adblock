@@ -4,8 +4,8 @@ function getSkipButtonByName(classNames) {
 
 function getSkipButtons() {
     return [
-        getSkipButtonByName("ytp-ad-skip-button ytp-button"),
         getSkipButtonByName("ytp-ad-skip-button-modern ytp-button"),
+        getSkipButtonByName("ytp-ad-skip-button ytp-button"),
     ]
 }
 
@@ -15,10 +15,12 @@ function checkForAds() {
     if (adExist) {
         console.log("Ad detected");
         let video = document.getElementsByClassName("video-stream html5-main-video")[0];
+        // TODO: try to change the video time instead of playback rate:
+        //  video.currentTime = 99999;
         if (video && video.playbackRate === 1) {
             let playbackRate = 1000;
-            console.log("Ad detected, accelerating video " + playbackRate + "x");
             video.playbackRate = playbackRate;
+            console.log("Ad detected, accelerating video " + playbackRate + "x");
         }
 
         let skipButtons = getSkipButtons();
@@ -26,12 +28,10 @@ function checkForAds() {
             let skipButton = skipButtons[i];
             if (skipButton) {
                 if (!skipButton.clicked) {
-                    console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
                     skipButton.click();
                     skipButton.clicked = true;
                     browser.runtime.sendMessage({adsSkipped: true});
-                    // } else if (!adExist) {
-                    //     skipButton.clicked = false;
+                    console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
                 }
             }
         }

@@ -1,8 +1,6 @@
 browser.runtime.onInstalled.addListener(() => {
     console.log('onInstalled');
     browser.storage.local.set({adsSkipped: 0});
-    // browser.action.setBadgeText({text: '0'});
-    // browser.action.setBadgeBackgroundColor({color: '#F0FFFF'});
 });
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -23,12 +21,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.adsSkipped !== undefined) {
         browser.storage.local.get('adsSkipped', (data) => {
             let newCount = (data.adsSkipped || 0) + 1;
-            browser.storage.local.set({adsSkipped: newCount}, () => {
-                // browser.action.setBadgeText({text: newCount.toString()});
-                // if (sender.tab.id) {
-                //     browser.action.setBadgeBackgroundColor({color: '#F0FFFF', tabId: sender.tab.id});
-                // }
-            });
+            browser.storage.local.set({adsSkipped: newCount});
         });
     }
 });

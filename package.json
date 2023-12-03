@@ -1,12 +1,11 @@
 {
   "scripts": {
-    "start:firefox": "web-ext run --firefox=flatpak:org.mozilla.firefox --verbose"
+    "start:firefox": "web-ext run --firefox=flatpak:org.mozilla.firefox --verbose",
+    "start:firefox-android": "web-ext run -t firefox-android --adb-device R58NC0CSMMH --firefox-apk org.mozilla.fenix --verbose"
   },
   "name": "youtube-adblock",
   "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
-  "version": "1.0.1",
   "main": "background.js",
   "keywords": [],
-  "author": "",
   "license": "ISC"
 }
