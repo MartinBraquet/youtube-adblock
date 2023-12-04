@@ -1,6 +1,6 @@
 browser.runtime.onInstalled.addListener(() => {
     console.log('onInstalled');
-    browser.storage.local.set({adsSkipped: 0});
+    // browser.storage.local.set({adsSkipped: 0});
 });
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
