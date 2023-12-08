@@ -21,6 +21,7 @@ function checkForAds() {
             let playbackRate = 1000;
             video.playbackRate = playbackRate;
             console.log("Ad detected, accelerating video " + playbackRate + "x");
+            browser.runtime.sendMessage({adsSkipped: true});
         }
 
         let skipButtons = getSkipButtons();
@@ -30,7 +31,6 @@ function checkForAds() {
                 if (!skipButton.clicked) {
                     skipButton.click();
                     skipButton.clicked = true;
-                    browser.runtime.sendMessage({adsSkipped: true});
                     console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
                 }
             }
