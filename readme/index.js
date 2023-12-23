@@ -8,7 +8,7 @@ const {JSDOM} = jsdom;
 
 let DATA = {
     addon_metadata: {},
-    auto_generation_note: "<!-- This README was automically generated based on the dynamic content in `readme/template.md`. -->"
+    auto_generation_note: "<!-- Do not modify this readme, it was automically generated based on the dynamic content in `readme/template.md`. -->"
 };
 
 
