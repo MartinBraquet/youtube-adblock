@@ -1,5 +1,3 @@
-<iframe style="border:none;" src="https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/"></iframe>
-
 # YouTube Ad Skipper
 
 This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less Than a Second.
