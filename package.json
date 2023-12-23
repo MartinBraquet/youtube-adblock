@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "jsdom": "^23.0.1",
-    "moustache": "^0.0.4"
+    "mustache": "^4.2.0"
   }
 }
