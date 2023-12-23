@@ -28,7 +28,7 @@ Note: Some ads in this demo are skipped so fast that it's difficult to notice th
 
 ![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif)
 
-#### Usage Statistics
+#### Statistics
 
 |        **Users**         |        **Stars**         |         **Reviews**          |
 |:------------------------:|:------------------------:|:----------------------------:|
