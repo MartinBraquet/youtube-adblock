@@ -1,8 +1,8 @@
 const MUSTACHE_TEMPLATE_PATH = './readme/template.md';
 const README_PATH = 'README.md';
 
-const Mustache = require('mustache');
 const fs = require('fs');
+const Mustache = require('mustache');
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 
@@ -11,8 +11,12 @@ let DATA = {
 };
 
 
-function getMetadataContent(element) {
-    return element.getElementsByClassName('MetadataCard-content')[0].textContent;
+function getMetadataContent(element, html = false) {
+    let block = element.getElementsByClassName('MetadataCard-content')[0];
+    if (html) {
+        return block.innerHTML;
+    }
+    return block.textContent;
 }
 
 function getMetadataTitle(element) {
@@ -33,7 +37,9 @@ async function setAddonMetadata() {
                     DATA.addon_metadata.users = getMetadataContent(element);
                 }
                 else if (getMetadataTitle(element) === "Reviews") {
-                    DATA.addon_metadata.reviews = getMetadataContent(element);
+                    let reviews = getMetadataContent(element, true);
+                    reviews = reviews.replace(/href="\//g, 'href="https://addons.mozilla.org/');
+                    DATA.addon_metadata.reviews = reviews;
                 }
                 else if (getMetadataTitle(element).includes("Stars")) {
                     DATA.addon_metadata.stars = getMetadataContent(element);

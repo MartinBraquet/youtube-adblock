@@ -28,9 +28,9 @@ Note: Some ads in this demo are skipped so fast that it's difficult to notice th
 
 #### Usage Statistics
 
-|        **Users**         |        **Stars**         |        **Reviews**         |
-|:------------------------:|:------------------------:|:--------------------------:|
-| {{addon_metadata.users}} | {{addon_metadata.stars}} | {{addon_metadata.reviews}} |
+|        **Users**         |        **Stars**         |         **Reviews**          |
+|:------------------------:|:------------------------:|:----------------------------:|
+| {{addon_metadata.users}} | {{addon_metadata.stars}} | {{{addon_metadata.reviews}}} |
 
 ## Installation
 
