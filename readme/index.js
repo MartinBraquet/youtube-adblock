@@ -1,7 +1,7 @@
 const MUSTACHE_TEMPLATE_PATH = './readme/template.md';
 const README_PATH = 'README.md';
 
-const Mustache = require('moustache');
+const Mustache = require('mustache');
 const fs = require('fs');
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
