@@ -7,5 +7,9 @@
   "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
   "main": "background.js",
   "keywords": [],
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^23.0.1",
+    "moustache": "^0.0.4"
+  }
 }
