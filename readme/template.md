@@ -1,3 +1,5 @@
+{{auto_generation_note}}
+
 # YouTube Ad Skipper
 
 This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less Than a Second.
