@@ -7,7 +7,8 @@ const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 
 let DATA = {
-    addon_metadata: {}
+    addon_metadata: {},
+    auto_generation_note: "<!-- This README was automically generated based on the dynamic content in `readme/template.md`. -->"
 };
 
 
