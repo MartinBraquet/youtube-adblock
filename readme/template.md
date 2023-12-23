@@ -68,7 +68,7 @@ Other versions might work, but have not been tested.
    ```sh
    sudo apt install npm
    sudo npm install --global web-ext
-   sudo npm install moustache jsdom
+   sudo npm install mustache jsdom
    ```
 
 3. Run the extension
