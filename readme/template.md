@@ -26,6 +26,12 @@ Note: Some ads in this demo are skipped so fast that it's difficult to notice th
 
 ![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif)
 
+#### Usage Statistics
+
+|        **Users**         |        **Stars**         |        **Reviews**         |
+|:------------------------:|:------------------------:|:--------------------------:|
+| {{addon_metadata.users}} | {{addon_metadata.stars}} | {{addon_metadata.reviews}} |
+
 ## Installation
 
 Install the extension
@@ -62,6 +68,7 @@ Other versions might work, but have not been tested.
    ```sh
    sudo apt install npm
    sudo npm install --global web-ext
+   sudo npm install moustache jsdom
    ```
 
 3. Run the extension
@@ -83,7 +90,7 @@ Other versions might work, but have not been tested.
 1. Build the extension
 
    ```sh
-   web-ext build --overwrite-dest --ignore-files demo martin
+   web-ext build --overwrite-dest --ignore-files demo martin readme package-lock.json
    ```
 
 2. The extension is now available in the `web-ext-artifacts` folder as a .zip file.
