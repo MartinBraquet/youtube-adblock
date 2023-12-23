@@ -1,4 +1,4 @@
-<!-- This README was automically generated based on the dynamic content in `readme/template.md`. -->
+<!-- Do not modify this readme, it was automically generated based on the dynamic content in `readme/template.md`. -->
 
 # YouTube Ad Skipper
 
