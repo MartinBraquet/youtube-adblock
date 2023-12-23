@@ -1,4 +1,4 @@
-{{auto_generation_note}}
+{{{auto_generation_note}}}
 
 # YouTube Ad Skipper
 
