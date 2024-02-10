@@ -5,8 +5,10 @@ function getSkipButtonByName(classNames) {
 function getSkipButtons() {
     return [
         getSkipButtonByName("ytp-skip-ad-button"),
+        getSkipButtonByName("ytp-ad-skip-button-modern"),
         getSkipButtonByName("ytp-ad-skip-button-modern ytp-button"),
         getSkipButtonByName("ytp-ad-skip-button ytp-button"),
+        getSkipButtonByName("ytp-ad-skip-button-container"),
     ]
 }
 
