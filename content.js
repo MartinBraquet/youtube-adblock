@@ -4,6 +4,7 @@ function getSkipButtonByName(classNames) {
 
 function getSkipButtons() {
     return [
+        getSkipButtonByName("ytp-skip-ad-button"),
         getSkipButtonByName("ytp-ad-skip-button-modern ytp-button"),
         getSkipButtonByName("ytp-ad-skip-button ytp-button"),
     ]
@@ -28,14 +29,14 @@ function checkForAds() {
         for (let i = 0; i < skipButtons.length; i++) {
             let skipButton = skipButtons[i];
             if (skipButton) {
-                if (!skipButton.clicked) {
+                // if (!skipButton.clicked) {
                     skipButton.click();
                     skipButton.clicked = true;
                     console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
-                }
+                // }
             }
         }
     }
 }
 
-setInterval(checkForAds, 200);
+setInterval(checkForAds, 2000);
