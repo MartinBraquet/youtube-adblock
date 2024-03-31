@@ -1,5 +1,7 @@
 <!-- Do not modify this readme, it was automically generated based on the dynamic content in `readme/template.md`. -->
 
+![https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg)
+
 # YouTube Ad Skipper
 
 This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less Than a Second.
