@@ -1,6 +1,6 @@
 {{{auto_generation_note}}}
 
-![https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg)
+![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg)
 
 # YouTube Ad Skipper
 
@@ -28,7 +28,7 @@ in the browser.
 
 Note: Some ads in this demo are skipped so fast that it's difficult to notice them.
 
-![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif)
+![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif?raw=true)
 
 #### Statistics
 
