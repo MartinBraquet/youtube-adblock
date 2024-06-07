@@ -21,10 +21,13 @@ function checkForAds() {
         // TODO: try to change the video time instead of playback rate:
         //  video.currentTime = 99999;
         if (video && video.playbackRate === 1) {
-            let playbackRate = 1000;
-            video.playbackRate = playbackRate;
-            console.log("Ad detected, accelerating video " + playbackRate + "x");
+            video.muted = video.hidden = true;
+            video.playbackRate = 5;
+            console.log("Ad detected, accelerating video " + video.playbackRate + "x");
             browser.runtime.sendMessage({adsSkipped: true});
+            setTimeout(function(){
+                video.playbackRate = 1000;
+            }, 2000);
         }
 
         let skipButtons = getSkipButtons();
