@@ -23,7 +23,7 @@ function checkForAds() {
         if (video && video.playbackRate === 1) {
             video.muted = video.hidden = true;
             video.playbackRate = 5;
-            console.log("Ad detected, accelerating video " + playbackRate + "x");
+            console.log("Ad detected, accelerating video " + video.playbackRate + "x");
             browser.runtime.sendMessage({adsSkipped: true});
             setTimeout(function(){
                 video.playbackRate = 1000;
