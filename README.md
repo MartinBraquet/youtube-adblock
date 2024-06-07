@@ -1,20 +1,20 @@
-<!-- Do not modify this readme, it was automically generated based on the dynamic content in `readme/template.md`. -->
+<!-- Do not modify this readme, it was automatically generated based on the dynamic content in `readme/template.md`. -->
 
 ![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg)
 
 # YouTube Ad Skipper
 
-This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Two Seconds or Less.
+This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Less Than a Second.
 
 * **Real-time Acceleration**: Ads are sped up on the fly.
 * **Auto-Skip**: Bypass ads as soon as they become skippable.
 
 #### How it Works
 
-A process, running when the current tab is `youtube.com/watch`, periodically checks the page content for ads.
-If there is one, the process mutes, hides and accelerates it.
-As soon as the `Skip Ads ->` button shows up, the process clicks it.
-When the ad is skipped, the process increments a local private counter of skipped ads in the browser.
+A process, running when the current tab is `youtube.com/watch`, periodically checks the page content for ads. If there
+is one, the process accelerates it by setting the playback rate to 1000. As soon as the `Skip Ads ->` button
+shows up, the process clicks it. When the ad is skipped, the process increments a local private counter of skipped ads
+in the browser.
 
 #### Privacy and Security
 
