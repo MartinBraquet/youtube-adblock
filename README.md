@@ -48,7 +48,7 @@ Once installed, the extension will automatically and seamlessly take care of ads
 ### Usage
 
 The ads are sped up by 5x for a few seconds, to evade YouTube's control, then it is boosted to 100x.
-Since this playback can cause issues or be too little for some users, this configuration is adjustable in the extension's settings
+Since this playback rate can cause issues or be too little for some users, this configuration is adjustable in the extension's settings
 (click on the extension's icon in the browser's toolbar).
 
 ## Development
