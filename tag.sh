@@ -1,7 +1,7 @@
 
 tag=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
-git tag -l
-tagged=$(git tag -l | grep $tag)
+git tag
+tagged=$(git tag -l $tag)
 echo $tagged
 if [ -z "$tagged" ]; then
   git tag -a $tag -m "Release $tag"
