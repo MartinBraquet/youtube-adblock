@@ -1,7 +1,7 @@
 set -e
 
 tag=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
-echo $(git tag -l )
+git tag -l
 tagged=$(git tag -l | grep $tag)
 echo $tagged
 if [ -z "$tagged" ]; then
