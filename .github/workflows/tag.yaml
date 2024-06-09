@@ -22,7 +22,7 @@ jobs:
 
       - name: Tag
         run: |
-          git config --global user.name 'martin'
+          git config --global user.name 'Martin'
           git config --global user.email 'martin.braquet@users.noreply.github.com'
           chmod +x ./tag.sh
           ./tag.sh
