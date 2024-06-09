@@ -19,17 +19,6 @@ jobs:
         with:
           ref: 'main'
 
-      - name: GitHub Tag Name example
+      - name: Release
         run: |
           ./release.sh
-
-      - name: Release
-        id: release-snapshot
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ TAG }}
-          release_name: ${{ TAG }}
-          draft: false
-          prerelease: false
