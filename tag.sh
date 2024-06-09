@@ -1,4 +1,3 @@
-set -e
 
 tag=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
 git tag -l
