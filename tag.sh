@@ -2,6 +2,7 @@ set -e
 
 tag=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
 tagged=$(git tag -l $tag)
+echo $tagged
 if [ -z "$tagged" ]; then
   git tag -a $tag -m "Release $tag"
   git push origin $tag
