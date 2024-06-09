@@ -16,10 +16,18 @@ function adExist() {
     return document.getElementsByClassName("ad-showing").length > 0;
 }
 
+const readLocalStorage = async (key) => {
+    return new Promise((resolve, reject) => {
+        browser.storage.local.get([key], function (result) {
+            resolve(result[key]);
+        });
+    });
+};
+
 let userPlaybackRate = 1;
 let userMuted = false;
 
-function checkForAds() {
+async function checkForAds() {
     let video = document.getElementsByClassName("video-stream html5-main-video")[0];
     if (adExist()) {
         // TODO: try to change the video time instead of playback rate:
@@ -29,11 +37,13 @@ function checkForAds() {
             video.muted = video.hidden = true;
 
             userPlaybackRate = video.playbackRate;
-            video.playbackRate = 5;
+            video.playbackRate = await readLocalStorage("adPlaybackRate") || 5;
             console.log("Ad detected, accelerating video " + video.playbackRate + "x");
+
             browser.runtime.sendMessage({adsSkipped: true});
-            setTimeout(function(){
-                video.playbackRate = 1000;
+            setTimeout(function () {
+                video.playbackRate = 100;
+                console.log("Ad detected, boosting to " + video.playbackRate + "x");
             }, 2000);
         }
 
@@ -46,8 +56,7 @@ function checkForAds() {
                 console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
             }
         }
-    }
-    else {
+    } else {
         if (video && video.playbackRate > 2) {
             video.muted = userMuted;
             video.hidden = false;
