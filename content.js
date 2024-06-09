@@ -17,6 +17,7 @@ function adExist() {
 }
 
 let userPlaybackRate = 1;
+let userMuted = false;
 
 function checkForAds() {
     let video = document.getElementsByClassName("video-stream html5-main-video")[0];
@@ -24,7 +25,9 @@ function checkForAds() {
         // TODO: try to change the video time instead of playback rate:
         //  video.currentTime = 99999;
         if (video && video.playbackRate <= 2) {
+            userMuted = video.muted;
             video.muted = video.hidden = true;
+
             userPlaybackRate = video.playbackRate;
             video.playbackRate = 5;
             console.log("Ad detected, accelerating video " + video.playbackRate + "x");
@@ -46,7 +49,8 @@ function checkForAds() {
     }
     else {
         if (video && video.playbackRate > 2) {
-            video.muted = video.hidden = false;
+            video.muted = userMuted;
+            video.hidden = false;
             video.playbackRate = userPlaybackRate;
             console.log("Ad ended, restoring video playback rate");
         }
