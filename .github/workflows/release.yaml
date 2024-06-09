@@ -2,26 +2,14 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "*"
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Checkout repo
-        uses: actions/checkout@v2
-        with:
-          ref: 'main'
-
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Release
-        run: |
-          git config --global user.name 'Martin'
-          git config --global user.email 'martin.braquet@users.noreply.github.com'
-          chmod +x ./release.sh
-          ./release.sh
+        uses: softprops/action-gh-release@v2
