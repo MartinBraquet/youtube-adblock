@@ -4,11 +4,32 @@ on:
   push:
     branches:
       - main
+
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-     - name: GitHub Tag Name example
-       run: |
-         echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-         echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: 'main'
+
+      - name: GitHub Tag Name example
+        run: |
+          ./release.sh
+
+      - name: Release
+        id: release-snapshot
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ TAG }}
+          release_name: ${{ TAG }}
+          draft: false
+          prerelease: false
