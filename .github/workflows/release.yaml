@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # To fetch all history for tags
 
       - name: Setup python
         uses: actions/setup-python@v5
