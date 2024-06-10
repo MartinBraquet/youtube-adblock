@@ -1,6 +1,7 @@
 {{{auto_generation_note}}}
 
-![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/main.yaml/badge.svg)
+![![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml)
+![![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml)
 
 # YouTube Ad Skipper
 
