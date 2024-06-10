@@ -1,7 +1,7 @@
 <!-- Do not modify this readme, it was automatically generated based on the dynamic content in `readme/template.md`. -->
 
-![![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml)
-![![](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml)
+![![Readme](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml)
+![![Release](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml)
 
 # YouTube Ad Skipper
 
