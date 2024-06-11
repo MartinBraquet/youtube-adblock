@@ -26,7 +26,7 @@ function isAdPersistentBar(element) {
 }
 
 function adExist(element) {
-    console.log("isAdPersistentBar", isAdPersistentBar(element));
+    // console.log("isAdPersistentBar", isAdPersistentBar(element));
     return element.getElementsByClassName("ad-showing").length > 0 || isAdPersistentBar(element);
 }
 
