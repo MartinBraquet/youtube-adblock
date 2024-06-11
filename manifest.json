@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "YouTube AdBlock",
-  "version": "1.63",
+  "version": "1.64",
   "description": "Accelerates and skips YouTube Ads in Two Seconds or Less",
   "permissions": [
     "storage",

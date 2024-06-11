@@ -69,7 +69,7 @@ async function checkForAds() {
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
             if (_adExist) {
-                if (video && video.playbackRate <= 2) {
+                if (video && !video.hidden) {
                     userMuted = video.muted;
                     video.muted = video.hidden = true;
 
@@ -93,7 +93,7 @@ async function checkForAds() {
                     }
                 }
             } else {
-                if (video && video.playbackRate > 2) {
+                if (video && video.hidden) {
                     video.muted = userMuted;
                     video.hidden = false;
                     video.playbackRate = userPlaybackRate;
