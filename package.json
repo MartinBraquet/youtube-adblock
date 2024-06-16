@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start:firefox": "web-ext run --firefox=flatpak:org.mozilla.firefox --verbose",
+    "start:chromium": "web-ext run -t chromium --verbose",
     "start:firefox-android": "web-ext run -t firefox-android --adb-device R58NC0CSMMH --firefox-apk org.mozilla.fenix --verbose"
   },
   "name": "youtube-adblock",

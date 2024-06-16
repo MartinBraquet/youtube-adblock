@@ -1,19 +1,34 @@
+// utils.js is already imported in the html.
+// Debug: in about:debugging#/runtime/this-firefox, click on "Inspect" for the extension, disable popup auto-hide in the
+// ••• menu, click on the extension symbol, click on the button to the left of the ••• menu, select "popup.html".
+
+function setElement(x, value) {
+    let element = document.getElementById(x);
+    local.get(x, (data) => {
+        let d = data[x];
+        if (d === undefined) {
+            d = defaultOptions[x];
+            local.set({[x]: d});
+        }
+        element[value] = d;
+    });
+}
+
+function addListener(x, value) {
+    let element = document.getElementById(x);
+    element.addEventListener('change', (event) => {
+        local.set({[x]: event.target[value]});
+    });
+}
+
+function setElementAndListener(x, value) {
+    setElement(x, value);
+    addListener(x, value);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    browser.storage.local.get('adsSkipped', (data) => {
-        document.getElementById('adsSkippedCount').textContent = data.adsSkipped || '0';
-    });
-
-    browser.storage.local.get('adPlaybackRate', (data) => {
-        document.getElementById('adPlaybackRate').value = data.adPlaybackRate || 5;
-    });
-    document.getElementById('adPlaybackRate').addEventListener('change', (event) => {
-        browser.storage.local.set({adPlaybackRate: event.target.value});
-    });
-
-    browser.storage.local.get('boostWanted', (data) => {
-        document.getElementById('boostWanted').checked = data.boostWanted;
-    });
-    document.getElementById('boostWanted').addEventListener('change', (event) => {
-        browser.storage.local.set({boostWanted: event.target.checked});
-    });
+    setElement("adsSkipped", "textContent");
+    setElementAndListener("adPlaybackRate", "value");
+    setElementAndListener("muteWanted", "checked");
+    // setElementAndListener("boostWanted", "checked");
 });

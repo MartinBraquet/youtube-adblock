@@ -1,3 +1,6 @@
+// utils.js is already imported as a content script.
+// Debug: ctrl+shift+i on a youtube.com tab, click on the extension's tab.
+
 window.mobileCheck = function () {
     let check = false;
     (function (a) {
@@ -43,8 +46,13 @@ function adExist(element) {
 
 const readLocalStorage = async (key) => {
     return new Promise((resolve, reject) => {
-        browser.storage.local.get([key], function (result) {
-            resolve(result[key]);
+        local.get([key], function (result) {
+            let value = result[key];
+            if (value === undefined) {
+                value = defaultOptions[key];
+                local.set({[key]: value});
+            }
+            resolve(value);
         });
     });
 };
@@ -73,22 +81,30 @@ async function checkForAds() {
         for (const video of videos) {
             if (_adExist) {
                 if (video && video.playbackRate <= 2) {
-                    userMuted = video.muted;
-                    video.muted = video.hidden = true;
+                    let muteWanted = await readLocalStorage("muteWanted");
+                    if (muteWanted) {
+                        // userMuted = video.muted;
+                        video.muted = true;
+                        console.log("YtAd detected, muting audio");
+                    }
+                    video.hidden = true;
 
-                    userPlaybackRate = video.playbackRate;
-                    video.playbackRate = await readLocalStorage("adPlaybackRate") || 5;
-                    console.log("Ad detected, accelerating video " + video.playbackRate + "x");
+                    let _userPlaybackRate = video.playbackRate;
+                    if (_userPlaybackRate <= 2) {
+                        userPlaybackRate = _userPlaybackRate;
+                    }
+                    video.playbackRate = await readLocalStorage("adPlaybackRate");
+                    console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
 
                     browser.runtime.sendMessage({adsSkipped: true});
 
-                    let boostWanted = await readLocalStorage("boostWanted");
-                    if (boostWanted) {
-                        setTimeout(function () {
-                            video.playbackRate = 100;
-                            console.log("Ad detected, boosting to " + video.playbackRate + "x");
-                        }, 2000);
-                    }
+                    // let boostWanted = await readLocalStorage("boostWanted",);
+                    // if (boostWanted) {
+                    //     setTimeout(function () {
+                    //         video.playbackRate = 64;
+                    //         console.log("YtAd detected, boosting to " + video.playbackRate + "x");
+                    //     }, 2000);
+                    // }
                 }
 
                 let skipButtons = getSkipButtons();
@@ -96,7 +112,7 @@ async function checkForAds() {
                     if (skipButton) {
                         skipButton.click();
                         skipButton.clicked = true;
-                        console.log("Ad detected, clicking skip button (" + skipButton.className + ")");
+                        console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
                     }
                 }
             } else {
@@ -104,7 +120,7 @@ async function checkForAds() {
                     video.muted = userMuted;
                     video.hidden = false;
                     video.playbackRate = userPlaybackRate;
-                    console.log("Ad ended, restoring video playback rate");
+                    console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
                 }
             }
         }

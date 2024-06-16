@@ -61,12 +61,12 @@
 </head>
 <body>
   <h1>YouTube<br>AdBlock</h1>
-  <p>Ads Blocked: <span id="adsSkippedCount"></span></p>
-  <p><label for="adPlaybackRate">Playback rate:</label>
-  <input type="number" id="adPlaybackRate" name="adPlaybackRate" min="3" max="1000" size="5"></p>
-  <p><label for="boostWanted">Boost after 2s:</label>
-  <input type="checkbox" id="boostWanted" name="boostWanted"></p>
+  <p>Ads Blocked: <span id="adsSkipped"></span></p>
+  <p><label for="adPlaybackRate">Playback rate:</label><input type="number" id="adPlaybackRate" name="adPlaybackRate" min="3" max="1000" size="5"></p>
+<!--  <p><label for="boostWanted">Boost after 2s:</label><input type="checkbox" id="boostWanted" name="boostWanted"></p>-->
+  <p><label for="muteWanted">Mute ad:</label><input type="checkbox" id="muteWanted" name="muteWanted"></p>
   <p><small>Note: the higher the playback rate,<br>the more likely YouTube will notice.</small></p>
+  <script src="utils.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
