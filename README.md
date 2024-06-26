@@ -35,7 +35,7 @@ Note: Some ads in this demo are skipped so fast that it's difficult to notice th
 
 |        **Users**         |        **Stars**         |         **Reviews**          |
 |:------------------------:|:------------------------:|:----------------------------:|
-| 3,726 | Rated 4.4 out of 5 | <a class="AddonMeta-reviews-content-link" href="https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/reviews/">25</a> |
+| 3,716 | Rated 4.4 out of 5 | <a class="AddonMeta-reviews-content-link" href="https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/reviews/">25</a> |
 
 ## Installation
 
