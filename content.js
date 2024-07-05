@@ -76,7 +76,6 @@ async function checkForAds() {
         let _adExist = adExist(player);
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
-            let _adDuration = video.duration;
             if (_adExist) {
                 if (video && !video.detected) {
                     video.detected = true;
@@ -109,24 +108,23 @@ async function checkForAds() {
                 let skipButtons = getSkipButtons();
                 for (const skipButton of skipButtons) {
                     if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
+                        skipButton.clicked = true;
                         // cannot simulate click on skip button, it will be detected
                         // skipButton.click();
                         skipVideo();
-                        skipButton.clicked = true;
                         console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
                     }
                 }
 
                 function skipVideo() {
-                    _adExist = adExist(player);
-                    if (video && _adExist && video.duration === _adDuration) {
-                        video.currentTime = _adDuration;
-                        console.log("YtAd detected, boosting to " + video.playbackRate + "x");
+                    if (video && video.detected) {
                         video.detected = false;
+                        video.currentTime = video.duration;
+                        console.log("YtAd detected, skipping to the end.");
                     }
                 }
             } else {
-                if (video.playbackRate > 2 || video.hidden || video.detected) {
+                if (video.detected) {
                     video.muted = userMuted;
                     video.hidden = false;
                     if (document.URL.includes("music.youtube.com")) {
