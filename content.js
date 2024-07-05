@@ -50,7 +50,7 @@ const readLocalStorage = async (key) => {
             let value = result[key];
             if (value === undefined) {
                 value = defaultOptions[key];
-                local.set({[key]: value});
+                local.set({ [key]: value });
             }
             resolve(value);
         });
@@ -70,48 +70,63 @@ async function checkForAds() {
         If an ad element is present, mute the video and set the playback rate to 5x, send adsSkipped message,
         click ad button.
         If the ad element is not present, restore the video settings (mute, hidden, playback rate) if they were changed.
-
-        Possible improvements:
-        - change the video time instead of the playback rate: video.currentTime = 99999
      */
     let movie_players = document.getElementsByClassName("html5-video-player");
     for (const player of movie_players) {
         let _adExist = adExist(player);
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
+            let _adDuration = video.duration;
             if (_adExist) {
-                if (video && video.playbackRate <= 2) {
+                if (video && !video.detected) {
+                    video.detected = true;
+
                     let muteWanted = await readLocalStorage("muteWanted");
                     if (muteWanted) {
                         video.muted = true;
                         console.log("YtAd detected, muting audio");
                     }
-                    video.hidden = true;
 
-                    video.playbackRate = await readLocalStorage("adPlaybackRate");
-                    console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
+                    let hideWanted = await readLocalStorage("hideWanted");
+                    if (hideWanted) {
+                        video.hidden = true;
+                        console.log("YtAd detected, hiding video");
+                    }
 
-                    browser.runtime.sendMessage({adsSkipped: true});
+                    let playbackRate = await readLocalStorage("adPlaybackRate");
+                    if (playbackRate > 1) {
+                        video.playbackRate = playbackRate;
+                        console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
+                    }
+                    browser.runtime.sendMessage({ adsSkipped: true });
 
-                    // let boostWanted = await readLocalStorage("boostWanted",);
-                    // if (boostWanted) {
-                    //     setTimeout(function () {
-                    //         video.playbackRate = 64;
-                    //         console.log("YtAd detected, boosting to " + video.playbackRate + "x");
-                    //     }, 2000);
-                    // }
+                    let skipWanted = await readLocalStorage("skipWanted",);
+                    if (skipWanted) {
+                        setTimeout(skipVideo, 2000);
+                    }
                 }
 
                 let skipButtons = getSkipButtons();
                 for (const skipButton of skipButtons) {
-                    if (skipButton) {
-                        skipButton.click();
+                    if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
+                        // cannot simulate click on skip button, it will be detected
+                        // skipButton.click();
+                        skipVideo();
                         skipButton.clicked = true;
                         console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
                     }
                 }
+
+                function skipVideo() {
+                    _adExist = adExist(player);
+                    if (video && _adExist && video.duration === _adDuration) {
+                        video.currentTime = _adDuration;
+                        console.log("YtAd detected, boosting to " + video.playbackRate + "x");
+                        video.detected = false;
+                    }
+                }
             } else {
-                if (video.playbackRate > 2 || video.hidden) {
+                if (video.playbackRate > 2 || video.hidden || video.detected) {
                     video.muted = userMuted;
                     video.hidden = false;
                     if (document.URL.includes("music.youtube.com")) {

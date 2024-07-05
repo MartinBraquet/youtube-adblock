@@ -62,9 +62,24 @@
 <body>
   <h1>YouTube<br>AdBlock</h1>
   <p>Ads Blocked: <span id="adsSkipped"></span></p>
-  <p><label for="adPlaybackRate">Playback rate:</label><input type="number" id="adPlaybackRate" name="adPlaybackRate" min="3" max="1000" size="5"></p>
-<!--  <p><label for="boostWanted">Boost after 2s:</label><input type="checkbox" id="boostWanted" name="boostWanted"></p>-->
-  <p><label for="muteWanted">Mute ad:</label><input type="checkbox" id="muteWanted" name="muteWanted"></p>
+  <table>
+    <tr>
+      <td align="left"><label for="adPlaybackRate">Playback rate:</label></td>
+      <td><input type="number" id="adPlaybackRate" name="adPlaybackRate" min="1" max="1000" size="5"></td>
+    </tr>
+    <tr>
+      <td align="left"><label for="skipWanted">Force Skip after 2s:</label></td>
+      <td><input type="checkbox" id="skipWanted" name="skipWanted"></td>
+    </tr>
+    <tr>
+      <td align="left"><label for="muteWanted">Mute ad:</label></td>
+      <td><input type="checkbox" id="muteWanted" name="muteWanted"></td>
+    </tr>
+    <tr>
+      <td align="left"><label for="hideWanted">Hide ad:</label></td>
+      <td><input type="checkbox" id="hideWanted" name="hideWanted"></td>
+    </tr>
+  </table>
   <p><small>Note: the higher the playback rate,<br>the more likely YouTube will notice.</small></p>
   <script src="utils.js"></script>
   <script src="popup.js"></script>

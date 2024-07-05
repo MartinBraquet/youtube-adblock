@@ -1,7 +1,8 @@
 const defaultOptions = {
     adsSkipped: 0,
-    adPlaybackRate: 12,
-    boostWanted: false,
-    muteWanted: true
+    adPlaybackRate: 5,
+    skipWanted: false,
+    muteWanted: true,
+    hideWanted: true
 }
 let local = browser.storage.local;

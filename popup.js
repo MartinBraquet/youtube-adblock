@@ -30,5 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setElement("adsSkipped", "textContent");
     setElementAndListener("adPlaybackRate", "value");
     setElementAndListener("muteWanted", "checked");
-    // setElementAndListener("boostWanted", "checked");
+    setElementAndListener("skipWanted", "checked");
+    setElementAndListener("hideWanted", "checked");
 });
