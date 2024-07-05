@@ -114,11 +114,11 @@ async function checkForAds() {
                 if (video.playbackRate > 2 || video.hidden) {
                     video.muted = userMuted;
                     video.hidden = false;
-                    if (document.URL.includes("www.youtube.com")) {
-                        // Only set the user playback rate for www.youtube.com, not music.youtube.com
-                        video.playbackRate = userPlaybackRate;
-                    } else {
+                    if (document.URL.includes("music.youtube.com")) {
                         video.playbackRate = 1;
+                    } else {
+                        // Only set the user playback rate for www.youtube.com or m.youtube.com, not music.youtube.com
+                        video.playbackRate = userPlaybackRate;
                     }
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
                 } else if (video.playbackRate <= 2) {
