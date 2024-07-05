@@ -83,16 +83,11 @@ async function checkForAds() {
                 if (video && video.playbackRate <= 2) {
                     let muteWanted = await readLocalStorage("muteWanted");
                     if (muteWanted) {
-                        // userMuted = video.muted;
                         video.muted = true;
                         console.log("YtAd detected, muting audio");
                     }
                     video.hidden = true;
 
-                    let _userPlaybackRate = video.playbackRate;
-                    if (_userPlaybackRate <= 2) {
-                        userPlaybackRate = _userPlaybackRate;
-                    }
                     video.playbackRate = await readLocalStorage("adPlaybackRate");
                     console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
 
@@ -116,11 +111,18 @@ async function checkForAds() {
                     }
                 }
             } else {
-                if (video && (video.playbackRate > 2 || video.hidden)) {
+                if (video.playbackRate > 2 || video.hidden) {
                     video.muted = userMuted;
                     video.hidden = false;
-                    video.playbackRate = userPlaybackRate;
+                    if (document.URL.includes("www.youtube.com")) {
+                        // Only set the user playback rate for www.youtube.com, not music.youtube.com
+                        video.playbackRate = userPlaybackRate;
+                    } else {
+                        video.playbackRate = 1;
+                    }
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
+                } else if (video.playbackRate <= 2) {
+                    userPlaybackRate = video.playbackRate;
                 }
             }
         }
