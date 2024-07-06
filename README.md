@@ -129,13 +129,22 @@ Other versions might work, but have not been tested.
 
 [Submit](https://addons.mozilla.org) the .zip file to Mozilla for review and publication.
 
-## Issue / Bug Report
+Note: naturally, you won't be able to publish the same extension or overwrite the existing one.
+If your extension diverges from the current one, you can change the extension's ID in the `manifest.json` file and publish
+it as a new extension in your own account.
 
-Please open an [issue](https://github.com/MartinBraquet/youtube-adblock/issues).
+## Feedback
 
-## Upgrades / Fixes
+### Short Comments
+Please write a [review](https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/reviews/) in the Firefox store.
 
-Please open a [pull request](https://github.com/MartinBraquet/youtube-adblock/pulls).
+### Issue / Bug Report / Feature Request
+- If you have a GitHub account, open an <a href="https://github.com/MartinBraquet/youtube-adblock/issues">issue</a> here.
+- Otherwise, write your feedback in this  <a href="https://forms.gle/c87fsmy3tG1MmJaLA">form</a>.
+
+## Contributions
+
+To provide upgrades or fixes, please open a [pull request](https://github.com/MartinBraquet/youtube-adblock/pulls).
 
 ## Disclaimer
 
