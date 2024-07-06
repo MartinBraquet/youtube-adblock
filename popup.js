@@ -14,16 +14,20 @@ function setElement(x, value) {
     });
 }
 
-function addListener(x, value) {
+function addListener(x, value, conversion) {
     let element = document.getElementById(x);
     element.addEventListener('change', (event) => {
-        local.set({[x]: event.target[value]});
+        let v = event.target[value];
+        if (conversion === "int") {
+            v = parseInt(v);
+        }
+        local.set({[x]: v});
     });
 }
 
-function setElementAndListener(x, value) {
+function setElementAndListener(x, value, conversion) {
     setElement(x, value);
-    addListener(x, value);
+    addListener(x, value, conversion);
 }
 
 function restoreDefaults() {
@@ -43,6 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setElementAndListener("adPlaybackRate", "value");
     setElementAndListener("muteWanted", "checked");
     setElementAndListener("hideWanted", "checked");
-    setElementAndListener("skipBehavior", "value");
+    setElementAndListener("skipBehavior", "value", "int");
     document.getElementById("restoreDefaults").addEventListener('click', restoreDefaults);
 });

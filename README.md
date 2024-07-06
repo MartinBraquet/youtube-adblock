@@ -65,17 +65,9 @@ Other versions might work, but have not been tested.
 
 ### Temporary Installation
 
-1. Clone or [download](https://github.com/MartinBraquet/youtube-adblock/archive/main.zip) the repo
+1. Clone or [download](https://github.com/MartinBraquet/youtube-adblock/archive/main.zip) the repo (and extract the zip file)
 
-   ```sh
-   git clone git@github.com:MartinBraquet/youtube-adblock.git
-    ```
-
-2. Type `about:debugging` in the Firefox URL search bar and click on **"This Firefox"**
-
-   ```url
-   about:debugging#/runtime/this-firefox
-   ```
+2. Navigate to `about:debugging#/runtime/this-firefox` in the Firefox URL search bar
 
 3. Right next to **Temporary Extensions** click on **"Load Temporary Add-on…"**
 
