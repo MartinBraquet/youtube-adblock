@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setElement("adsSkipped", "textContent");
     setElementAndListener("adPlaybackRate", "value");
     setElementAndListener("muteWanted", "checked");
-    setElementAndListener("forceSkip", "checked");
     setElementAndListener("hideWanted", "checked");
     setElementAndListener("skipBehavior", "value");
     document.getElementById("restoreDefaults").addEventListener('click', restoreDefaults);

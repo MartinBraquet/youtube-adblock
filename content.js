@@ -99,8 +99,8 @@ async function checkForAds() {
                         console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
                     }
 
-                    let forceSkip = await readLocalStorage("forceSkip",);
-                    if (forceSkip) {
+                    let skipBehavior = await readLocalStorage("skipBehavior");
+                    if (skipBehavior === 2) {
                         setTimeout(skipVideo, 2000);
                     }
                 }
@@ -111,10 +111,10 @@ async function checkForAds() {
                     for (const skipButton of skipButtons) {
                         if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
                             skipButton.clicked = true;
-                            if (skipBehavior == 1) {
+                            if (skipBehavior === 1) {
                                 skipButton.click();
                                 console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
-                            } else if (skipBehavior == 2) {
+                            } else if (skipBehavior === 2) {
                                 skipVideo();
                             }
                         }
