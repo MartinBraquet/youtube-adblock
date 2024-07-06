@@ -109,8 +109,7 @@ async function checkForAds() {
                     }
 
                     let boostWanted = await readLocalStorage("boostWanted");
-                    let skipBehavior = await readLocalStorage("skipBehavior");
-                    if (boostWanted && skipBehavior === 2) {
+                    if (boostWanted) {
                         setTimeout(skipVideo, 2000, video);
                     }
                 } else if (video.currentTime === 0 && video.detected) {
