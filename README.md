@@ -63,24 +63,13 @@ Since this playback rate can cause issues or be too little for some users, this 
 
 Other versions might work, but have not been tested.
 
-### Temporary Installation
-
-1. Clone or [download](https://github.com/MartinBraquet/youtube-adblock/archive/main.zip) the repo (and extract the zip file)
-
-2. Navigate to `about:debugging#/runtime/this-firefox` in the Firefox URL search bar
-
-3. Right next to **Temporary Extensions** click on **"Load Temporary Add-on…"**
-
-4. In the selection click on any file in the root directory of the local extension
-
-### Development Installation
+### Installation
 
 1. Clone the repo
 
    ```sh
    git clone git@github.com:MartinBraquet/youtube-adblock.git
     ```
-
 2. Install the prerequisites
 
    For Debian-based distributions:
@@ -94,7 +83,6 @@ Other versions might work, but have not been tested.
    ```
 
 3. Run the extension
-
    ```sh
    web-ext run
    ```
@@ -106,7 +94,6 @@ Other versions might work, but have not been tested.
    ```sh
    Ctrl + Shift + I
    ```
-
    Or `about:debugging#/runtime/this-firefox` and click on `Inspect` to open the extension console.
 
 ### Build
