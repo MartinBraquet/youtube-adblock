@@ -46,7 +46,25 @@ Install the extension
 
 Once installed, the extension will automatically and seamlessly take care of ads on YouTube.
 
-### Usage
+### Locally
+
+Alternatively, you can install the extension from a local folder.
+This can be useful for easily testing a not-yet-published version of the extension, without having to set up
+a development environment. For example, a pull request might be in progress to address a user issue, and we would like the user
+to test the changes (without taking the risk to publish this version on the store).
+
+To do so:
+
+1. Obtain the extension source code locally: clone the relevant repo or download and extract its zip file (e.g., [here](https://github.com/MartinBraquet/youtube-adblock/archive/main.zip) for the main branch)
+
+2. Navigate to `about:debugging#/runtime/this-firefox` in the Firefox URL search bar
+
+3. Right next to `Temporary Extensions`, click on `Load Temporary Add-on...`
+
+4. In the selection, click on any file in the root directory of the local extension
+
+
+## Usage
 
 The ads are sped up by 5x for a few seconds, to evade YouTube's control, then it is boosted to 100x.
 Since this playback rate can cause issues or be too little for some users, this configuration is adjustable in the extension's settings
@@ -63,13 +81,14 @@ Since this playback rate can cause issues or be too little for some users, this 
 
 Other versions might work, but have not been tested.
 
-### Installation
+### Set up environment
 
 1. Clone the repo
 
    ```sh
    git clone git@github.com:MartinBraquet/youtube-adblock.git
     ```
+
 2. Install the prerequisites
 
    For Debian-based distributions:
