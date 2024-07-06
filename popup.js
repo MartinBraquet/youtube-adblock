@@ -26,10 +26,24 @@ function setElementAndListener(x, value) {
     addListener(x, value);
 }
 
+function restoreDefaults() {
+    for (let x in defaultOptions) {
+        local.set({[x]: defaultOptions[x]});
+        let element = document.getElementById(x);
+        if (typeof defaultOptions[x] === "boolean") {
+            element.checked = defaultOptions[x];
+        } else {
+            element.value = defaultOptions[x];
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     setElement("adsSkipped", "textContent");
     setElementAndListener("adPlaybackRate", "value");
     setElementAndListener("muteWanted", "checked");
-    setElementAndListener("skipWanted", "checked");
+    setElementAndListener("forceSkip", "checked");
     setElementAndListener("hideWanted", "checked");
+    setElementAndListener("skipBehavior", "value");
+    document.getElementById("restoreDefaults").addEventListener('click', restoreDefaults);
 });

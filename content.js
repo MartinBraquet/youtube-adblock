@@ -77,8 +77,9 @@ async function checkForAds() {
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
             if (_adExist) {
-                if (video && !video.detected) {
+                if (video && !video.paused && !video.detected) {
                     video.detected = true;
+                    browser.runtime.sendMessage({ adsSkipped: true });
 
                     let muteWanted = await readLocalStorage("muteWanted");
                     if (muteWanted) {
@@ -97,22 +98,27 @@ async function checkForAds() {
                         video.playbackRate = playbackRate;
                         console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
                     }
-                    browser.runtime.sendMessage({ adsSkipped: true });
 
-                    let skipWanted = await readLocalStorage("skipWanted",);
-                    if (skipWanted) {
+                    let forceSkip = await readLocalStorage("forceSkip",);
+                    if (forceSkip) {
                         setTimeout(skipVideo, 2000);
                     }
                 }
 
-                let skipButtons = getSkipButtons();
-                for (const skipButton of skipButtons) {
-                    if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
-                        skipButton.clicked = true;
-                        // cannot simulate click on skip button, it will be detected
-                        // skipButton.click();
-                        skipVideo();
-                        console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
+                let skipBehavior = await readLocalStorage("skipBehavior");
+                if (skipBehavior > 0) {
+                    let skipButtons = getSkipButtons();
+                    for (const skipButton of skipButtons) {
+                        if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
+                            skipButton.clicked = true;
+                            if (skipBehavior == 1) {
+                                skipButton.click();
+                                console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
+                            } else if (skipBehavior == 2) {
+                                skipVideo();
+                                console.log("YtAd detected, skipping to the end");
+                            }
+                        }
                     }
                 }
 
@@ -125,6 +131,7 @@ async function checkForAds() {
                 }
             } else {
                 if (video.detected) {
+                    video.detected = false;
                     video.muted = userMuted;
                     video.hidden = false;
                     if (document.URL.includes("music.youtube.com")) {
