@@ -116,7 +116,6 @@ async function checkForAds() {
                                 console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
                             } else if (skipBehavior == 2) {
                                 skipVideo();
-                                console.log("YtAd detected, skipping to the end");
                             }
                         }
                     }
