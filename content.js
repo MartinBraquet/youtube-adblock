@@ -76,8 +76,9 @@ async function checkForAds() {
         let _adExist = adExist(player);
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
+            if (!video) continue;
             if (_adExist) {
-                if (video && !video.paused && !video.detected) {
+                if (!video.paused && !video.detected) {
                     video.detected = true;
                     browser.runtime.sendMessage({ adsSkipped: true });
 
@@ -103,20 +104,22 @@ async function checkForAds() {
                     if (skipBehavior === 2) {
                         setTimeout(skipVideo, 2000);
                     }
+                } else if (video.currentTime == 0 && video.detected) {
+                    video.detected = false;
                 }
 
                 let skipBehavior = await readLocalStorage("skipBehavior");
-                if (skipBehavior > 0) {
-                    let skipButtons = getSkipButtons();
-                    for (const skipButton of skipButtons) {
-                        if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
-                            skipButton.clicked = true;
-                            if (skipBehavior === 1) {
-                                skipButton.click();
-                                console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
-                            } else if (skipBehavior === 2) {
-                                skipVideo();
-                            }
+                let skipButtons = getSkipButtons();
+                for (const skipButton of skipButtons) {
+                    if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
+                        skipButton.clicked = true;
+                        if (skipBehavior === 1) {
+                            skipButton.click();
+                            console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
+                        } else if (skipBehavior === 2) {
+                            skipVideo();
+                        } else {
+                            console.log("YtAd detected, skip button detected but the skip behavior is set to 'do nothing'");
                         }
                     }
                 }
