@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
 <head>
   <title>YouTube AdBlock</title>
   <style>
@@ -13,60 +14,163 @@
       color: #F0FFFF;
       border-radius: 30px;
     }
+
     small {
       font-size: 10px;
     }
+
     h1 {
       color: #F0FFFF;
       font-size: 24px;
     }
+
+    .banner {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 15px;
+    }
+
+    .banner img {
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    p.status {
+      color: #4CAF50;
+    }
+
     .button {
       display: inline-block;
       padding: 10px 20px;
-      margin: 10px;
+      margin-top: 10px;
       font-size: 14px;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
       outline: none;
       color: #fff;
-      background-color: #0088cc;
       border: none;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: all 0.3s;
     }
 
-    .button:hover {
+    .button,
+    input:checked+.slider {
+      background-color: #0088cc;
+    }
+
+    .button:hover,
+    input:checked+.slider:hover {
       background-color: #005c99;
     }
+
     .button:active {
-      background-color: #005c99;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
+      box-shadow: 0 3px #666;
+      transform: translateY(2px);
     }
-    .banner {
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 15px;
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 45px;
+      height: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .banner img {
-      height: 50px;
-      border-radius: 10px;
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
-    p.status {
-      color: #4CAF50;
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 24px;
+      -webkit-transition: .1s;
+      transition: .1s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      -webkit-transition: .1s;
+      transition: .1s;
+    }
+
+    input:hover+.slider {
+      background-color: #aaa;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+      transform: translateX(20px);
     }
   </style>
 </head>
+
 <body>
   <h1>YouTube<br>AdBlock</h1>
   <p>Ads Blocked: <span id="adsSkipped"></span></p>
-  <p><label for="adPlaybackRate">Playback rate:</label><input type="number" id="adPlaybackRate" name="adPlaybackRate" min="3" max="1000" size="5"></p>
-<!--  <p><label for="boostWanted">Boost after 2s:</label><input type="checkbox" id="boostWanted" name="boostWanted"></p>-->
-  <p><label for="muteWanted">Mute ad:</label><input type="checkbox" id="muteWanted" name="muteWanted"></p>
+  <table>
+    <tr>
+      <td align="left"><label for="adPlaybackRate">Playback Rate</label></td>
+      <td><input type="number" id="adPlaybackRate" name="adPlaybackRate" min="1" max="1000" size="5"></td>
+    </tr>
+    <tr>
+      <td align="left"><label for="muteWanted">Mute Ad</label></td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" id="muteWanted" name="muteWanted">
+          <span class="slider round"></span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><label for="hideWanted">Hide Ad</label></td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" id="hideWanted" name="hideWanted">
+          <span class="slider round"></span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><label for="boostWanted">Boost After 2s</label></td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" id="boostWanted" name="boostWanted">
+          <span class="slider round"></span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><label for="skipBehavior">If Skip Available</label></td>
+      <td>
+        <select id="skipBehavior" name="skipBehavior">
+          <option value=0>Do Nothing</option>
+          <option value=1>Click Button</option>
+          <option value=2>Boost Ad</option>
+      </td>
+    </tr>
+  </table>
+  <button class="button" id="restoreDefaults">Restore Defaults</button>
   <p><small>Note: the higher the playback rate,<br>the more likely YouTube will notice.</small></p>
   <script src="utils.js"></script>
   <script src="popup.js"></script>
 </body>
+
 </html>

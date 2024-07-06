@@ -14,21 +14,40 @@ function setElement(x, value) {
     });
 }
 
-function addListener(x, value) {
+function addListener(x, value, conversion) {
     let element = document.getElementById(x);
     element.addEventListener('change', (event) => {
-        local.set({[x]: event.target[value]});
+        let v = event.target[value];
+        if (conversion === "int") {
+            v = parseInt(v);
+        }
+        local.set({[x]: v});
     });
 }
 
-function setElementAndListener(x, value) {
+function setElementAndListener(x, value, conversion) {
     setElement(x, value);
-    addListener(x, value);
+    addListener(x, value, conversion);
+}
+
+function restoreDefaults() {
+    for (let x in defaultOptions) {
+        local.set({[x]: defaultOptions[x]});
+        let element = document.getElementById(x);
+        if (typeof defaultOptions[x] === "boolean") {
+            element.checked = defaultOptions[x];
+        } else {
+            element.value = defaultOptions[x];
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     setElement("adsSkipped", "textContent");
     setElementAndListener("adPlaybackRate", "value");
     setElementAndListener("muteWanted", "checked");
-    // setElementAndListener("boostWanted", "checked");
+    setElementAndListener("hideWanted", "checked");
+    setElementAndListener("boostWanted", "checked");
+    setElementAndListener("skipBehavior", "value", "int");
+    document.getElementById("restoreDefaults").addEventListener('click', restoreDefaults);
 });

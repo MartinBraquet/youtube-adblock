@@ -57,6 +57,14 @@ const readLocalStorage = async (key) => {
     });
 };
 
+function skipVideo(video) {
+    if (video && video.detected) {
+        video.detected = false;
+        video.currentTime = video.duration;
+        console.log("YtAd detected, skipping to the end.");
+    }
+}
+
 let userPlaybackRate = 1;
 let userMuted = false;
 
@@ -70,48 +78,64 @@ async function checkForAds() {
         If an ad element is present, mute the video and set the playback rate to 5x, send adsSkipped message,
         click ad button.
         If the ad element is not present, restore the video settings (mute, hidden, playback rate) if they were changed.
-
-        Possible improvements:
-        - change the video time instead of the playback rate: video.currentTime = 99999
      */
     let movie_players = document.getElementsByClassName("html5-video-player");
     for (const player of movie_players) {
         let _adExist = adExist(player);
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
+            if (!video) continue;
             if (_adExist) {
-                if (video && video.playbackRate <= 2) {
+                if (!video.paused && !video.detected) {
+                    video.detected = true;
+                    browser.runtime.sendMessage({adsSkipped: true});
+
                     let muteWanted = await readLocalStorage("muteWanted");
                     if (muteWanted) {
                         video.muted = true;
                         console.log("YtAd detected, muting audio");
                     }
-                    video.hidden = true;
 
-                    video.playbackRate = await readLocalStorage("adPlaybackRate");
-                    console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
+                    let hideWanted = await readLocalStorage("hideWanted");
+                    if (hideWanted) {
+                        video.hidden = true;
+                        console.log("YtAd detected, hiding video");
+                    }
 
-                    browser.runtime.sendMessage({adsSkipped: true});
+                    let playbackRate = await readLocalStorage("adPlaybackRate");
+                    if (playbackRate > 1) {
+                        video.playbackRate = playbackRate;
+                        console.log("YtAd detected, accelerating video " + video.playbackRate + "x");
+                    }
 
-                    // let boostWanted = await readLocalStorage("boostWanted",);
-                    // if (boostWanted) {
-                    //     setTimeout(function () {
-                    //         video.playbackRate = 64;
-                    //         console.log("YtAd detected, boosting to " + video.playbackRate + "x");
-                    //     }, 2000);
-                    // }
+                    let boostWanted = await readLocalStorage("boostWanted");
+                    if (boostWanted) {
+                        setTimeout(skipVideo, 2000, video);
+                    }
+                } else if (video.currentTime === 0 && video.detected) {
+                    video.detected = false;
                 }
 
+                let skipBehavior = await readLocalStorage("skipBehavior");
                 let skipButtons = getSkipButtons();
                 for (const skipButton of skipButtons) {
-                    if (skipButton) {
-                        skipButton.click();
+                    if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
                         skipButton.clicked = true;
-                        console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
+                        if (skipBehavior === 1) {
+                            skipButton.click();
+                            console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
+                        } else if (skipBehavior === 2) {
+                            skipVideo(video);
+                        } else if (skipBehavior === 0) {
+                            console.log("YtAd detected, skip button detected but the skip behavior is set to 'do nothing'");
+                        } else {
+                            console.error("YtAd detected, invalid skip behavior: " + skipBehavior);
+                        }
                     }
                 }
             } else {
-                if (video.playbackRate > 2 || video.hidden) {
+                if (video.detected) {
+                    video.detected = false;
                     video.muted = userMuted;
                     video.hidden = false;
                     if (document.URL.includes("music.youtube.com")) {
@@ -121,7 +145,7 @@ async function checkForAds() {
                         video.playbackRate = userPlaybackRate;
                     }
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
-                } else if (video.playbackRate <= 2) {
+                } else {
                     userPlaybackRate = video.playbackRate;
                 }
             }

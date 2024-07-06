@@ -5,7 +5,7 @@
     "start:firefox-android": "web-ext run -t firefox-android --adb-device R58NC0CSMMH --firefox-apk org.mozilla.fenix --verbose"
   },
   "name": "youtube-adblock",
-  "description": "Accelerates and Skips YouTube Ads in Less Than a Second",
+  "description": "Accelerates and Skips YouTube Ads in Two Seconds or Less",
   "main": "background.js",
   "keywords": [],
   "license": "ISC",
