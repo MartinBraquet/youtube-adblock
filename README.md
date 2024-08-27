@@ -66,34 +66,9 @@ To do so:
 
 ## Usage
 
-The add-on should work seemlessly upon installation. 
-However, it is possible that the default configuration creates issues (such as triggering the YouTube detection banner) for you, as YouTube provides different different user interfaces / experiences depending on the location, language, etc.
-
-### Configurations
-
-You are welcome to adjust the configurations in the extension's settings (click on the extension's icon in the browser's toolbar).
-Description of each parameter:
-* _Playback Rate_: the playback speed desired for the ad. The higher the playback rate, the faster the ad will end, but also the more likely YouTube will notice that an adblock has been used.
-* _Mute Ad_: whether to mute the ad. When the playback rate is low, we can hear the sped-up ad sound; so it can be convenient to mute it.
-* _Hide Ad_: whether to hide the ad by replacing it with a black screen while it is playing.
-* _Boost After 2s_: whether to boost* the ad after 2 seconds.
-* _If Skip Available_: action to perform when the "Skip Ad" button gets available. Options:
-  * _Click Button_: click the button, the natural option.
-  * _Boost Ad_: Boost* the ad.
-  * _Do Nothing_: Do nothing.
-
-*Boosting consists in setting the ad timestamp to the end, essentially ending it. This can't be done as soon as the ad starts, as YouTube would detect it.
-
-### Avoid YouTube Detection
-
-If YouTube detected that you used an adblock, you can do the following:
-
-* Adjust the configurations defined above:
-  * Reduce the playback rate (e.g., 4),
-  * Turn OFF _Mute Ad_, _Hide Ad_ and _Boost After 2s_,
-  * Set _If Skip Available_ to _Click Button_ or _Do Nothing_.
-* Reload the page.
-* If none of the above worked, write a feedback (see instructions at the end of this document).
+The ads are sped up by 5x for a few seconds, to evade YouTube's control, then it is boosted to 100x.
+Since this playback rate can cause issues or be too little for some users, this configuration is adjustable in the extension's settings
+(click on the extension's icon in the browser's toolbar).
 
 ## Development
 
