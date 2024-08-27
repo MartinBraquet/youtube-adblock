@@ -66,7 +66,7 @@ To do so:
 
 ## Usage
 
-The add-on should work seemlessly upon installation. 
+The add-on should work seamlessly upon installation. 
 However, it is possible that the default configuration creates issues (such as triggering the YouTube detection banner) for you, as YouTube provides different different user interfaces / experiences depending on the location, language, etc.
 
 ### Configurations
