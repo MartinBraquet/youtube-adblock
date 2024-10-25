@@ -1,6 +1,21 @@
 // utils.js is already imported as a content script.
 // Debug: ctrl+shift+i on a youtube.com tab, click on the extension's tab.
 
+const strToHash = (str, seed = 0) => {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for(let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+};
+
 window.mobileCheck = function () {
     let check = false;
     (function (a) {
@@ -29,10 +44,11 @@ function isAdPersistentBar(element) {
         return false;
     }
     let progress_bars = element.getElementsByClassName('ytp-ad-persistent-progress-bar-container');
-    if (!progress_bars) {
+    if (progress_bars.length === 0) {
         return false;
     }
     for (const progress_bar of progress_bars) {
+        logOnce('AdPersistentBar: ' + progress_bar.outerHTML);
         if (progress_bar.style.display === 'none') {
             return false;
         }
@@ -57,16 +73,39 @@ const readLocalStorage = async (key) => {
     });
 };
 
-function skipVideo(video) {
-    if (video && video.detected) {
-        video.detected = false;
-        video.currentTime = video.duration;
-        console.log("YtAd detected, skipping to the end.");
+
+let hashes = [];
+
+function logOnce(x) {
+    let hash = strToHash(x);
+    if (!hashes.includes(hash)) {
+        hashes.push(hash);
+        console.log("YtAd - " + x);
     }
 }
 
 let userPlaybackRate = 1;
 let userMuted = false;
+
+function restoreDefaults(video) {
+    video.muted = userMuted;
+    video.hidden = false;
+    if (document.URL.includes("music.youtube.com")) {
+        video.playbackRate = 1;
+    } else {
+        // Only set the user playback rate for www.youtube.com or m.youtube.com, not music.youtube.com
+        video.playbackRate = userPlaybackRate;
+    }
+}
+
+function skipVideo(video) {
+    if (video && video.detected) {
+        video.detected = false;
+        video.currentTime = video.duration;
+        restoreDefaults(video);
+        console.log("YtAd detected, skipping to the end.");
+    }
+}
 
 async function checkForAds() {
     /*
@@ -81,6 +120,7 @@ async function checkForAds() {
      */
     let movie_players = document.getElementsByClassName("html5-video-player");
     for (const player of movie_players) {
+        logOnce('Video class: ' + player.className);
         let _adExist = adExist(player);
         let videos = player.getElementsByClassName("video-stream html5-main-video");
         for (const video of videos) {
@@ -134,16 +174,10 @@ async function checkForAds() {
                     }
                 }
             } else {
+                video.hidden = false;
                 if (video.detected) {
                     video.detected = false;
-                    video.muted = userMuted;
-                    video.hidden = false;
-                    if (document.URL.includes("music.youtube.com")) {
-                        video.playbackRate = 1;
-                    } else {
-                        // Only set the user playback rate for www.youtube.com or m.youtube.com, not music.youtube.com
-                        video.playbackRate = userPlaybackRate;
-                    }
+                    restoreDefault(video);
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
                 } else {
                     userPlaybackRate = video.playbackRate;
