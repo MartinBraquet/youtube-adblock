@@ -1,7 +1,9 @@
-<!-- Do not modify this readme, it was automatically generated based on the dynamic content in `readme/template.md`. -->
-
 [![Readme](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/readme_build.yaml)
 [![Release](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml/badge.svg)](https://github.com/MartinBraquet/youtube-adblock/actions/workflows/release.yaml)
+[![](https://img.shields.io/amo/users/youtube_adblock)](https://addons.mozilla.org/addon/youtube_adblock)
+[![](https://img.shields.io/amo/dw/youtube_adblock)](https://addons.mozilla.org/addon/youtube_adblock)
+[![](https://img.shields.io/amo/stars/youtube_adblock)](https://addons.mozilla.org/addon/youtube_adblock/reviews)
+[![](https://img.shields.io/amo/v/youtube_adblock?label=Mozilla+store)](https://addons.mozilla.org/addon/youtube_adblock)
 
 # YouTube Ad Skipper
 
@@ -30,12 +32,6 @@ When the ad is skipped, the process increments a local private counter of skippe
 Note: Some ads in this demo are skipped so fast that it's difficult to notice them.
 
 ![](https://github.com/MartinBraquet/youtube-adblock/blob/main/demo/youtube-adblock-demo.gif?raw=true)
-
-#### Statistics
-
-|        **Users**         |        **Stars**         |         **Reviews**          |
-|:------------------------:|:------------------------:|:----------------------------:|
-| 4,634 | Rated 4.3 out of 5 | <a class="AddonMeta-reviews-content-link" href="https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/reviews/">38</a> |
 
 ## Installation
 
