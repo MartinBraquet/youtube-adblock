@@ -3,14 +3,14 @@
 
 const strToHash = (str, seed = 0) => {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-    for(let i = 0, ch; i < str.length; i++) {
+    for (let i = 0, ch; i < str.length; i++) {
         ch = str.charCodeAt(i);
         h1 = Math.imul(h1 ^ ch, 2654435761);
         h2 = Math.imul(h2 ^ ch, 1597334677);
     }
-    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
     h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
 
     return 4294967296 * (2097151 & h2) + (h1 >>> 0);
@@ -118,6 +118,7 @@ async function checkForAds() {
         click ad button.
         If the ad element is not present, restore the video settings (mute, hidden, playback rate) if they were changed.
      */
+    let hideWanted = await readLocalStorage("hideWanted");
     let movie_players = document.getElementsByClassName("html5-video-player");
     for (const player of movie_players) {
         logOnce('Video class: ' + player.className);
@@ -136,7 +137,6 @@ async function checkForAds() {
                         console.log("YtAd detected, muting audio");
                     }
 
-                    let hideWanted = await readLocalStorage("hideWanted");
                     if (hideWanted) {
                         video.hidden = true;
                         console.log("YtAd detected, hiding video");
@@ -162,7 +162,9 @@ async function checkForAds() {
                     if (skipButton && !skipButton.clicked && skipButton.style.display !== "none") {
                         skipButton.clicked = true;
                         if (skipBehavior === 1) {
-                            skipButton.click();
+                            ["mousedown", "mouseup", "click"].forEach(eventType => {
+                                skipButton.dispatchEvent(new MouseEvent(eventType, {bubbles: true, cancelable: true}));
+                            });
                             console.log("YtAd detected, clicking skip button (" + skipButton.className + ")");
                         } else if (skipBehavior === 2) {
                             skipVideo(video);
@@ -177,11 +179,18 @@ async function checkForAds() {
                 video.hidden = false;
                 if (video.detected) {
                     video.detected = false;
-                    restoreDefault(video);
+                    restoreDefaults(video);
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
                 } else {
                     userPlaybackRate = video.playbackRate;
                 }
+            }
+        }
+
+        if (hideWanted) {
+            let endAds = document.getElementsByClassName('ytp-ad-action-interstitial-slot')
+            for (const endAd of endAds) {
+                endAd.hidden = true
             }
         }
     }
