@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start:firefox": "web-ext run --firefox=/snap/firefox/5600/usr/lib/firefox/firefox --verbose",
-    "start:chromium": "web-ext run -t chromium --verbose",
-    "start:firefox-android": "web-ext run -t firefox-android --adb-device RZCX810PM0Y --firefox-apk org.mozilla.fenix --verbose"
+    "start:firefox": "web-ext run --firefox=/snap/firefox/5600/usr/lib/firefox/firefox",
+    "start:chromium": "web-ext run -t chromium",
+    "start:firefox-android": "web-ext run -t firefox-android --adb-device RZCX810PM0Y --firefox-apk org.mozilla.fenix"
   },
   "name": "youtube-adblock",
   "description": "Skips YouTube Ads",
