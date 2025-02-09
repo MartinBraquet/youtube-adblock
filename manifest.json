@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "YouTube AdBlock",
   "version": "1.71",
-  "description": "Accelerates and skips YouTube Ads in Two Seconds or Less",
+  "description": "Skips YouTube Ads",
   "permissions": [
     "storage",
     "activeTab",

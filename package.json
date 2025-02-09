@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "start:firefox": "web-ext run --firefox=/snap/firefox/5134/usr/lib/firefox/firefox --verbose",
+    "start:firefox": "web-ext run --firefox=/snap/firefox/5600/usr/lib/firefox/firefox --verbose",
     "start:chromium": "web-ext run -t chromium --verbose",
-    "start:firefox-android": "web-ext run -t firefox-android --adb-device R58NC0CSMMH --firefox-apk org.mozilla.fenix --verbose"
+    "start:firefox-android": "web-ext run -t firefox-android --adb-device RZCX810PM0Y --firefox-apk org.mozilla.fenix --verbose"
   },
   "name": "youtube-adblock",
-  "description": "Accelerates and Skips YouTube Ads in Two Seconds or Less",
+  "description": "Skips YouTube Ads",
   "main": "background.js",
   "keywords": [],
   "license": "ISC",

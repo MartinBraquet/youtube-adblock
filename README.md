@@ -4,7 +4,7 @@
 [![](https://img.shields.io/amo/stars/youtube_adblock)](https://addons.mozilla.org/addon/youtube_adblock/reviews)
 [![](https://img.shields.io/amo/v/youtube_adblock?label=Mozilla+store)](https://addons.mozilla.org/addon/youtube_adblock)
 
-# YouTube Ad Skipper
+# YouTube AdBlock
 
 This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Two Seconds or Less.
 
@@ -36,7 +36,7 @@ Note: Some ads in this demo are skipped so fast that it's difficult to notice th
 
 Install the extension
 
-* at https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock,
+* at https://addons.mozilla.org/addon/youtube_adblock,
 * or go to `Add-ons` and search for `Youtube AdBlock accelerates`.
 
 Once installed, the extension will automatically and seamlessly take care of ads on YouTube.
@@ -94,7 +94,7 @@ If YouTube detected that you used an adblock, you can do the following:
 
 ### Prerequisites
 
-* [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/)
+* [Mozilla Firefox](https://www.mozilla.org/firefox/new/)
 * [Node.js](https://nodejs.org/en/download/): 20.9.0
 * [npm](https://www.npmjs.com/get-npm): 10.1.0
 * [web-ext](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/): 7.8.0
@@ -156,7 +156,7 @@ it as a new extension in your own account.
 ## Feedback
 
 ### Short Comments
-Please write a [review](https://addons.mozilla.org/en-US/firefox/addon/youtube_adblock/reviews/) in the Firefox store.
+Please write a [review](https://addons.mozilla.org/addon/youtube_adblock/reviews/) in the Firefox store.
 
 ### Issue / Bug Report / Feature Request
 - If you have a GitHub account, open an <a href="https://github.com/MartinBraquet/youtube-adblock/issues">issue</a> here.
