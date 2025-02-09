@@ -28,8 +28,8 @@ module.exports = {
     },
     run: {
         startUrl: [
+            "https://www.youtube.com/watch?v=qj-Mlygkheg",
             "about:debugging#/runtime/this-firefox",
-            "https://www.youtube.com/nature",
         ],
     },
 };
