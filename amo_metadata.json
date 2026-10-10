@@ -1,7 +1,7 @@
 {
   "version": {
     "release_notes": {
-      "en-US": ""
+      "en-US": "Count each ad once. Clearer wording of the 'Jump to End' options. No more repeated script injection."
     }
   }
 }

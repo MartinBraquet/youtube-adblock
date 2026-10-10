@@ -86,6 +86,9 @@ function logOnce(x) {
 
 let userPlaybackRate = 1;
 let userMuted = false;
+// For how long the user settings keep being re-applied once an ad ended, in case the player puts its own
+// (muted, playback rate) state back on the video when the content starts, as reported on m.youtube.com (issue #20).
+const RESTORE_WINDOW_MS = 3000;
 
 function restoreDefaults(video) {
     video.muted = userMuted;
@@ -102,8 +105,19 @@ function skipVideo(video) {
     if (video && video.detected) {
         video.detected = false;
         video.currentTime = video.duration;
+        video.restoreUntil = Date.now() + RESTORE_WINDOW_MS;
         restoreDefaults(video);
         console.log("YtAd detected, skipping to the end.");
+    }
+}
+
+// Shopping / product stickers in Shorts: affiliate links drawn over the video, with no way to close them (issue #21).
+function hideProductStickers() {
+    for (const sticker of document.querySelectorAll('yt-overlay-product-sticker, #sticker-layer > *')) {
+        if (!sticker.hidden) {
+            sticker.hidden = true;
+            logOnce('Hiding product sticker: ' + sticker.tagName.toLowerCase());
+        }
     }
 }
 
@@ -152,9 +166,12 @@ async function checkForAds() {
                     if (boostWanted) {
                         setTimeout(skipVideo, 2000, video);
                     }
-                } else if (video.currentTime === 0 && video.detected) {
+                } else if (video.currentTime === 0 && video.detected && video.lastAdTime > 0) {
+                    // The time went back to 0 after having advanced: a new ad of the same pod started.
+                    // (A time still at 0 right after the detection just means the ad is buffering.)
                     video.detected = false;
                 }
+                video.lastAdTime = video.currentTime;
 
                 let skipBehavior = await readLocalStorage("skipBehavior");
                 let skipButtons = getSkipButtons();
@@ -179,10 +196,18 @@ async function checkForAds() {
                 video.hidden = false;
                 if (video.detected) {
                     video.detected = false;
+                    video.restoreUntil = Date.now() + RESTORE_WINDOW_MS;
                     restoreDefaults(video);
                     console.log("YtAd ended, restoring default. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
+                } else if (video.restoreUntil > Date.now()) {
+                    if (video.muted !== userMuted || video.playbackRate !== userPlaybackRate) {
+                        restoreDefaults(video);
+                        console.log("YtAd ended, restoring default again. Muted: " + userMuted + ", Playback rate: " + userPlaybackRate + "x");
+                    }
                 } else {
+                    // Remember what the user chose, to put it back after the next ad.
                     userPlaybackRate = video.playbackRate;
+                    userMuted = video.muted;
                 }
             }
         }
@@ -193,6 +218,10 @@ async function checkForAds() {
                 endAd.hidden = true
             }
         }
+    }
+
+    if (hideWanted) {
+        hideProductStickers();
     }
 }
 

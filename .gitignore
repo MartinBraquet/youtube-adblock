@@ -2,3 +2,6 @@ martin/
 .idea/
 web-ext-artifacts/
 /node_modules/
+.venv/
+scripts/out/
+__pycache__/

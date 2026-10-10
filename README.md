@@ -10,10 +10,11 @@ This is a Mozilla Firefox Add-On Accelerating and Skipping YouTube Ads in Two Se
 
 * **Real-time Acceleration**: Ads are sped up on the fly.
 * **Auto-Skip**: Bypass ads as soon as they become skippable.
+* **Clean Shorts**: Product / shopping stickers drawn over Shorts are hidden.
 
 #### How it Works
 
-A process, running when the current tab is `youtube.com/watch`, periodically checks the page content for ads.
+A process, running on `youtube.com` pages, periodically checks the page content for ads.
 If there is one, the process mutes, hides and accelerates it.
 As soon as the `Skip Ads ->` button shows up, the process clicks it.
 When the ad is skipped, the process increments a local private counter of skipped ads in the browser.
@@ -70,14 +71,20 @@ You are welcome to adjust the configurations in the extension's settings (click 
 Description of each parameter:
 * _Playback Rate_: the playback speed desired for the ad. The higher the playback rate, the faster the ad will end, but also the more likely YouTube will notice that an adblock has been used.
 * _Mute Ad_: whether to mute the ad. When the playback rate is low, we can hear the sped-up ad sound; so it can be convenient to mute it.
-* _Hide Ad_: whether to hide the ad by replacing it with a black screen while it is playing.
-* _Boost After 2s_: whether to boost* the ad after 2 seconds.
+* _Hide Ad_: whether to hide the ad by replacing it with a black screen while it is playing. Also hides the product stickers drawn over Shorts.
+* _Jump to End After 2s_: whether to jump to the end* of the ad after 2 seconds.
 * _If Skip Available_: action to perform when the "Skip Ad" button gets available. Options:
   * _Click Button_: click the button, the natural option.
-  * _Boost Ad_: Boost* the ad.
+  * _Jump to End_: Jump to the end* of the ad.
   * _Do Nothing_: Do nothing.
 
-*Boosting consists in setting the ad timestamp to the end, essentially ending it. This can't be done as soon as the ad starts, as YouTube would detect it.
+*Jumping to the end consists in setting the ad timestamp to its end, essentially ending it. This can't be done as soon as the ad starts, as YouTube would detect it.
+
+### Autoplay
+
+The add-on only acts on an ad that is playing. If your browser is set to block videos from playing automatically
+(e.g., _Settings > Privacy & Security > Autoplay_ in Firefox), the ad, and therefore its skipping, only starts once
+you press play. Allowing autoplay on youtube.com removes that delay.
 
 ### Avoid YouTube Detection
 
@@ -134,6 +141,31 @@ Other versions might work, but have not been tested.
    Ctrl + Shift + I
    ```
    Or `about:debugging#/runtime/this-firefox` and click on `Inspect` to open the extension console.
+
+### Testing
+
+Unit tests load `utils.js` and `content.js` in a [jsdom](https://github.com/jsdom/jsdom) page that mimics the YouTube
+player, and check what the add-on does with the video when an ad shows up, when the skip button appears, etc.
+
+```sh
+npm install
+npm test
+```
+
+### Live check
+
+YouTube changes its html from time to time. To check that the add-on still handles ads on the real site, the script
+below loads the add-on in a throwaway Firefox profile, plays a few videos and records what the player and the
+add-on did (ad detected, video muted / hidden / accelerated, skip button, console logs...), with screenshots
+and page sources saved under `scripts/out/`.
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install selenium
+npm run live-check -- https://www.youtube.com/watch?v=qj-Mlygkheg
+```
+
+Ads are not served on every page load, so `RELOADS=5` reloads each page a few times; `MOBILE=1` tests the mobile
+site (m.youtube.com), `EXT=0` runs without the add-on, `HEADLESS=0` shows the browser.
 
 ### Build
 

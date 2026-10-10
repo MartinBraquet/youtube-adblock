@@ -1,20 +1,18 @@
 // utils.js is already imported as a background script.
 // Debug: in about:debugging#/runtime/this-firefox, click on "Inspect" for the extension.
 
-browser.runtime.onInstalled.addListener(() => {
+// The content script is declared in manifest.json and runs on every youtube.com page; it keeps running across
+// YouTube's in-page navigations. Only the tabs that were already open when the add-on got installed or updated
+// need it injected by hand.
+browser.runtime.onInstalled.addListener(async () => {
     console.log('onInstalled');
-});
-
-browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    console.log('onUpdated');
-    if (changeInfo.status === 'complete' && tab.url && tab.url.includes('youtube.com/watch')) {
-        browser.scripting.executeScript({
-            target: {tabId: tabId}, files: ['utils.js', 'content.js']
-        }, () => {
-            if (browser.runtime.lastError) {
-                console.error(`Script injection failed: ${browser.runtime.lastError.message}`);
-            }
-        });
+    const tabs = await browser.tabs.query({url: '*://*.youtube.com/*'});
+    for (const tab of tabs) {
+        try {
+            await browser.scripting.executeScript({target: {tabId: tab.id}, files: ['utils.js', 'content.js']});
+        } catch (e) {
+            console.error(`Script injection failed in tab ${tab.id}: ${e.message}`);
+        }
     }
 });
 

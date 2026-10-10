@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "YouTube AdBlock",
-  "version": "1.71",
+  "version": "1.72",
   "description": "Skips YouTube Ads",
   "permissions": [
     "storage",
